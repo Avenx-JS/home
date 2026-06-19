@@ -4,16 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avenx.js</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Avenx.js - The Blazingly Fast Reactivity Framework</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --bg-color: #000000;
+            --bg-card: #09090b;
+            --bg-card-hover: #121214;
             --text-color: #ffffff;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --muted-color: #888888;
+            --muted-color: #8a8a93;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.18);
+            
+            /* Code highlights - professional slate scheme */
+            --code-bg: #050507;
+            --code-tag: #cbd5e1;
+            --code-attr: #94a3b8;
+            --code-string: #64748b;
+            --code-keyword: #ffffff;
+            --code-number: #cbd5e1;
+            --code-comment: #475569;
         }
 
         @keyframes fadeIn {
@@ -21,7 +32,6 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -42,6 +52,7 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         .grid-overlay {
@@ -50,27 +61,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
             z-index: -1;
+            pointer-events: none;
         }
 
-        nav {
-            padding: 0.9rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 20;
-            background: rgba(0, 0, 0, 0.45);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border-bottom: 1px solid var(--border-color);
-        }
-
+        /* Container sizes */
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 0 2rem;
             width: 100%;
+        }
+
+        /* Header Navigation */
+        nav {
+            padding: 0.9rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border-color);
         }
 
         nav .container {
@@ -83,34 +97,98 @@
             font-size: 1.2rem;
             font-weight: 800;
             letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo span {
+            color: var(--muted-color);
+            font-weight: 400;
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            gap: 1.8rem;
         }
 
         .links a {
             color: var(--text-color);
             text-decoration: none;
-            margin-left: 2rem;
             font-weight: 500;
             font-size: 0.8rem;
             opacity: 0.6;
-            transition: opacity 0.3s;
+            transition: opacity 0.2s ease;
         }
 
         .links a:hover {
             opacity: 1;
         }
 
+        /* Buttons styles */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .btn-solid {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .btn-solid:hover {
+            opacity: 0.9;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-outline:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .github-stars-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            margin-left: 0.3rem;
+            color: var(--text-color);
+        }
+
+        /* Splash Hero (Centered) */
         .hero {
-            flex: 1;
+            min-height: 85vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(to bottom, rgba(17, 17, 17, 0.26), rgba(0, 0, 0, 0.199)), url('media/hero.png');
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8)), url('media/hero.png');
             background-size: cover;
             background-position: center;
             position: relative;
             overflow: hidden;
+            padding: 4rem 0;
         }
 
         .hero::after {
@@ -121,46 +199,747 @@
             width: 100%;
             height: 30%;
             background: linear-gradient(to top, var(--bg-color), transparent);
+            pointer-events: none;
         }
 
         .hero-content {
             animation: fadeIn 1.2s ease-out forwards;
             z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1 {
-            font-size: 8rem;
+            font-size: 7rem;
             font-weight: 900;
-            letter-spacing: -6px;
+            letter-spacing: -5px;
             line-height: 1;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         .heading-logo {
-            height: 1.4em;
+            height: 1.2em;
             width: auto;
-            transform: translateY(-0.08em);
-            margin-right: -0.15em;
+            transform: translateY(-0.06em);
+            margin-right: -0.12em;
         }
 
-
-
-        p {
-            font-size: 1.2rem;
+        /* Hero Subtext */
+        p.hero-tagline {
+            font-size: 1.1rem;
             color: var(--text-color);
-            font-weight: 400;
-            margin-bottom: 3rem;
-            letter-spacing: 0.05em;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
         }
 
+        p.hero-desc {
+            font-size: 1.1rem;
+            color: var(--muted-color);
+            max-width: 600px;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        /* NPM install capsule */
+        .install-box {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: #0d0d10;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.65rem 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .install-box:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .install-text {
+            color: var(--text-color);
+            user-select: all;
+        }
+
+        .install-text::before {
+            content: '$ ';
+            color: var(--muted-color);
+        }
+
+        .copy-icon {
+            opacity: 0.5;
+            transition: opacity 0.2s ease;
+        }
+
+        .install-box:hover .copy-icon {
+            opacity: 1;
+        }
+
+        .copy-tooltip {
+            position: absolute;
+            top: -35px;
+            right: 50%;
+            transform: translateX(50%) translateY(5px);
+            background: #ffffff;
+            color: #000000;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.2s ease;
+        }
+
+        .copy-tooltip.show {
+            opacity: 1;
+            transform: translateX(50%) translateY(0);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Layout & Common Sections */
+        main {
+            display: flex;
+            flex-direction: column;
+            gap: 7rem;
+            padding-bottom: 8rem;
+        }
+
+        section {
+            padding-top: 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-overline {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--muted-color);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .section-desc {
+            font-size: 0.95rem;
+            color: var(--muted-color);
+            max-width: 500px;
+            margin: 0.5rem auto 0;
+        }
+
+        /* IDE Layout & Code Sandbox */
+        .ide-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .ide-header {
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.6rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .ide-dots {
+            display: flex;
+            gap: 5px;
+        }
+
+        .ide-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .ide-tabs {
+            display: flex;
+            gap: 4px;
+            margin-left: 1.2rem;
+            flex-grow: 1;
+        }
+
+        .ide-tab {
+            padding: 0.25rem 0.7rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted-color);
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .ide-tab:hover {
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .ide-tab.active {
+            color: var(--text-color);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .ide-file-type {
+            font-size: 0.7rem;
+            color: var(--muted-color);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .ide-body {
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            background: var(--code-bg);
+            overflow-x: auto;
+            flex-grow: 1;
+        }
+
+        .ide-code {
+            display: none;
+        }
+
+        .ide-code.active {
+            display: block;
+        }
+
+        /* Syntax Highlighting */
+        .tag { color: var(--code-tag); }
+        .attr { color: var(--code-attr); }
+        .string { color: var(--code-string); }
+        .keyword { color: var(--code-keyword); font-weight: 500; }
+        .number { color: var(--code-number); }
+        .comment { color: var(--code-comment); }
+
+        /* Preview Code Sandbox Showcase Section */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .showcase-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .showcase-text h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .showcase-text p {
+            color: var(--muted-color);
+            font-size: 0.95rem;
+        }
+
+        /* Features Section Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.2s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            color: var(--text-color);
+            margin-bottom: 1.2rem;
+            opacity: 0.95;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .feature-card p {
+            font-size: 0.85rem;
+            color: var(--muted-color);
+            line-height: 1.5;
+        }
+
+        /* Code Explorer Section */
+        .explorer-grid {
+            display: grid;
+            grid-template-columns: 0.7fr 1.3fr;
+            gap: 3rem;
+            align-items: flex-start;
+        }
+
+        .explorer-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .explorer-item {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+        }
+
+        .explorer-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+            border-color: var(--border-hover);
+        }
+
+        .explorer-item.active {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .explorer-step-lbl {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted-color);
+            font-weight: 500;
+        }
+
+        .explorer-step-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .explorer-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .explorer-desc-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1.25rem;
+        }
+
+        .explorer-desc-box h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .explorer-desc-box p {
+            font-size: 0.85rem;
+            color: var(--muted-color);
+        }
+
+        /* Interactive Demo (Live Sandbox Simulation) */
+        .sandbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: stretch;
+        }
+
+        .sandbox-line-highlight {
+            background: rgba(255, 255, 255, 0.06);
+            display: inline-block;
+            width: calc(100% + 2.5rem);
+            margin-left: -1.25rem;
+            padding-left: 1.25rem;
+            border-left: 2px solid #ffffff;
+        }
+
+        .live-output-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .live-output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
+        }
+
+        .live-output-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted-color);
+            text-transform: uppercase;
+        }
+
+        .live-dot {
+            width: 6px;
+            height: 6px;
+            background: #ffffff;
+            border-radius: 50%;
+            animation: pulse-dot 1.5s infinite;
+        }
+
+        @keyframes pulse-dot {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        .sandbox-widget {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .sandbox-value-group {
+            margin: 1.2rem 0;
+        }
+
+        .sandbox-count {
+            font-size: 3rem;
+            font-weight: 800;
+        }
+
+        .sandbox-double-lbl {
+            font-size: 0.75rem;
+            color: var(--muted-color);
+            margin-top: 0.2rem;
+        }
+
+        .sandbox-double-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .sandbox-btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .state-observer {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+        }
+
+        .state-observer-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.7rem;
+            color: var(--muted-color);
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 0.25rem;
+        }
+
+        /* Shared State (Bridges) */
+        .bridge-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+            align-items: center;
+        }
+
+        .bridge-diagram {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.2rem;
+            height: 380px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .diagram-node {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            width: 180px;
+            text-align: center;
+            position: relative;
+            z-index: 5;
+        }
+
+        .diagram-node-center {
+            background: #ffffff;
+            color: #000000;
+            border-color: #ffffff;
+        }
+
+        .diagram-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .diagram-svg-path {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.15);
+            stroke-width: 1.5px;
+        }
+
+        .diagram-svg-path-glow {
+            fill: none;
+            stroke: #ffffff;
+            stroke-width: 1.5px;
+            stroke-linecap: round;
+            stroke-dasharray: 6, 120;
+            animation: flow-run 4s linear infinite;
+        }
+
+        @keyframes flow-run {
+            0% { stroke-dashoffset: 126; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        .bridge-snippets {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .bridge-snippets p {
+            font-size: 0.9rem;
+            color: var(--muted-color);
+            line-height: 1.6;
+        }
+
+        /* CLI Reference & Quick Start */
+        .cli-grid {
+            display: grid;
+            grid-template-columns: 0.82fr 1.18fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .cli-steps {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .cli-step-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .cli-step-num {
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--border-color);
+            background: rgba(255, 255, 255, 0.02);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 0.2rem;
+        }
+
+        .cli-step-desc h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .cli-step-desc p {
+            font-size: 0.8rem;
+            color: var(--muted-color);
+        }
+
+        .cli-btn-execute {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 0.4rem;
+            display: inline-block;
+            transition: all 0.2s ease;
+        }
+
+        .cli-btn-execute:hover {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .terminal-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            height: 320px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal-screen {
+            background: var(--code-bg);
+            padding: 1.25rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #d1d5db;
+            overflow-y: auto;
+            flex-grow: 1;
+            line-height: 1.6;
+        }
+
+        .terminal-prompt {
+            color: var(--muted-color);
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 6px;
+            height: 12px;
+            background: var(--text-color);
+            vertical-align: middle;
+            animation: flash-cursor 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes flash-cursor {
+            50% { opacity: 0; }
+        }
+
+        .term-success {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .term-dim {
+            color: var(--code-comment);
+        }
+
+        /* Footer CTA Banner */
+        .cta-banner {
+            text-align: center;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 4.5rem 2rem;
+            max-width: 900px;
+            margin: 2rem auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .cta-banner h2 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-banner p {
+            color: var(--muted-color);
+            font-size: 1.05rem;
+            max-width: 550px;
+        }
+
+        /* Structured footer */
         footer {
-            padding: 6rem 0 4rem;
+            padding: 5rem 0 3rem;
             border-top: 1px solid var(--border-color);
             margin-top: auto;
+            background: #030304;
         }
 
         .footer-content {
@@ -168,25 +947,35 @@
             justify-content: space-between;
             align-items: flex-start;
             gap: 4rem;
+            margin-bottom: 2.5rem;
         }
 
-        .footer-info .logo {
-            margin-bottom: 1rem;
+        .footer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
         }
 
         .footer-info p {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             text-transform: none;
             letter-spacing: normal;
             margin-bottom: 0;
+            color: var(--muted-color);
+            max-width: 320px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 4rem;
         }
 
         .footer-group h3 {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             color: var(--text-color);
         }
 
@@ -195,37 +984,70 @@
         }
 
         .footer-group ul li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.6rem;
         }
 
         .footer-group ul li a {
             color: var(--muted-color);
             text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
+            font-size: 0.8rem;
+            transition: color 0.2s ease;
         }
 
         .footer-group ul li a:hover {
             color: var(--text-color);
         }
 
-        @media (max-width: 768px) {
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 1.8rem;
+            font-size: 0.75rem;
+            color: var(--muted-color);
+        }
+
+        /* Mobile adaptation */
+        @media (max-width: 900px) {
             h1 {
-                font-size: 5.5rem;
+                font-size: 5rem;
                 letter-spacing: -3px;
             }
 
-            p {
-                font-size: 0.9rem;
+            .showcase-grid, .features-grid, .explorer-grid, .sandbox-grid, .bridge-grid, .cli-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 2.5rem;
+            }
+
+            .footer-links {
+                gap: 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 3.5rem;
+                letter-spacing: -2px;
+            }
+
+            p.hero-tagline {
+                font-size: 0.85rem;
+                letter-spacing: 0.1em;
             }
 
             .links {
                 display: none;
             }
 
-            .footer-content {
+            .hero-buttons {
                 flex-direction: column;
-                gap: 3rem;
+                width: 100%;
+                max-width: 280px;
             }
         }
     </style>
@@ -233,36 +1055,492 @@
 
 <body>
     <div class="grid-overlay"></div>
+    
+    <!-- 1. Navigation Bar (Header) -->
     <nav>
         <div class="container">
-            <div class="logo">Avenx.js</div>
-            <div class="links">
-                <a href="https://github.com/avenx-js">GitHub</a>
-                <a href="https://www.npmjs.com/package/avenx-core">npm</a>
-                <a href="">Docs</a>
+            <a href="#" class="logo" id="nav-brand">
+                <img src="media/logo.svg" alt="A" style="height: 1.1rem; width: auto; vertical-align: middle;">
+                Avenx<span>.js</span>
+            </a>
+            <div class="links" id="nav-links-container">
+                <a href="#features" id="nav-link-features">Features</a>
+                <a href="#concepts" id="nav-link-concepts">Concepts</a>
+                <a href="#bridges" id="nav-link-bridges">Bridges</a>
+                <a href="#cli" id="nav-link-cli">CLI Tooling</a>
+                <a href="#quickstart" id="nav-link-quickstart">Quick Start</a>
+                <a href="https://github.com/avenx-js/avenx" target="_blank" rel="noopener noreferrer" style="opacity: 0.85; font-weight: 600;" id="nav-link-github">
+                    GitHub<span class="github-stars-badge" id="github-stars">★ 1.2k</span>
+                </a>
+                <a href="#quickstart" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.75rem; border-radius: 4px;" id="nav-btn-start">Get Started</a>
             </div>
         </div>
     </nav>
 
-    <header class="hero">
+    <!-- 2. Hero Section (Splash Hero) -->
+    <header class="hero" id="hero-banner">
         <div class="container">
             <div class="hero-content">
                 <h1><img src="media/logo.svg" alt="A" class="heading-logo">venx.js</h1>
-                <p>The Blazingly Fast Reactivity Framework.</p>
+                <p class="hero-tagline">The Blazingly Fast Reactivity Framework.</p>
+                <p class="hero-desc">
+                    A compiler-driven component system with proxy-based reactivity, scoped styles, and zero runtime dependencies. Build fast, ship light.
+                </p>
+                
+                <!-- NPM copyable container -->
+                <div class="install-box" onclick="copyNpmText()" id="hero-npm-install">
+                    <span class="install-text" id="npm-command-string">npm install avenx-core</span>
+                    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <div class="copy-tooltip" id="install-tooltip">Copied!</div>
+                </div>
+
+                <div class="hero-buttons">
+                    <a href="#quickstart" class="btn btn-solid" id="hero-cta-primary">Get Started</a>
+                    <a href="#concepts" class="btn btn-outline" id="hero-cta-secondary">Read the Concepts</a>
+                </div>
             </div>
         </div>
     </header>
 
-    <main>
-        
+    <main class="container">
+        <!-- Showcase: Tabs Sandbox Preview (First Look) -->
+        <section class="showcase-section" id="intro-showcase">
+            <div class="showcase-grid">
+                <div class="showcase-text">
+                    <span class="section-overline" style="text-align: left;">SFC Pattern</span>
+                    <h3>Single File, Scoped styles.</h3>
+                    <p>
+                        Avenx components unify state declaration, calculated attributes, and markup handlers in a single `.component.js` structure. Global themes and isolated scoped styles sit cleanly in custom tag headers.
+                    </p>
+                    <p>
+                        The dev bundle parses these components offline to generate lightweight standard ES modules running natively in the client.
+                    </p>
+                </div>
+                
+                <!-- Right column mockup tabs -->
+                <div class="ide-card" id="showcase-ide">
+                    <div class="ide-header">
+                        <div class="ide-dots">
+                            <div class="ide-dot"></div>
+                            <div class="ide-dot"></div>
+                            <div class="ide-dot"></div>
+                        </div>
+                        <div class="ide-tabs">
+                            <button class="ide-tab active" onclick="switchShowcaseTab('js')" id="tab-sc-js">counter.component.js</button>
+                            <button class="ide-tab" onclick="switchShowcaseTab('css')" id="tab-sc-css">counter.component.css</button>
+                        </div>
+                        <span class="ide-file-type" id="sc-filetype-label">Avenx SFC</span>
+                    </div>
+                    <div class="ide-body" style="min-height: 240px;">
+                        <!-- JS code content -->
+                        <pre class="ide-code active" id="code-sc-js"><code><span class="tag">&lt;state</span> <span class="attr">count</span>=<span class="string">"0"</span> <span class="attr">title</span>=<span class="string">"Counter"</span> <span class="tag">/&gt;</span>
+<span class="tag">&lt;computed</span> <span class="attr">name</span>=<span class="string">"doubleCount"</span> <span class="attr">value</span>=<span class="string">"count * 2"</span> <span class="tag">/&gt;</span>
+
+<span class="tag">&lt;action</span> <span class="attr">name</span>=<span class="string">"increment"</span><span class="tag">&gt;</span>
+    state.count++;
+<span class="tag">&lt;/action&gt;</span>
+
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"counter-card"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>{{ title }}<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Count: {{ count }} (Double: {{ doubleCount }})<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;button</span> <span class="attr">@click</span>=<span class="string">"increment()"</span><span class="tag">&gt;</span>+1<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/div&gt;</span></code></pre>
+                        
+                        <!-- CSS code content -->
+                        <pre class="ide-code" id="code-sc-css"><code><span class="tag">&lt;@global&gt;</span>
+    <span class="keyword">@def</span> primary-color <span class="string">#ffffff</span>;
+<span class="tag">&lt;/@global&gt;</span>
+
+<span class="tag">&lt;@css&gt;</span>
+    <span class="keyword">.counter-card</span> {
+        <span class="attr">padding</span>: <span class="number">1.5rem</span>;
+        <span class="attr">border</span>: <span class="number">1px</span> solid <span class="string">rgba(255, 255, 255, 0.1)</span>;
+    }
+    <span class="keyword">button</span> {
+        <span class="attr">background</span>: <span class="string">var(--primary-color)</span>;
+        <span class="attr">color</span>: <span class="string">#000000</span>;
+    }
+<span class="tag">&lt;/@css&gt;</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Core Features / "Why Avenx?" Grid -->
+        <section id="features">
+            <div class="section-header">
+                <span class="section-overline" id="feat-overline">Zero Boilerplate. High Performance.</span>
+                <h2 class="section-title" id="feat-title">Why Developers Choose Avenx-JS</h2>
+            </div>
+            
+            <div class="features-grid" id="features-cards">
+                <!-- 1. Proxy reactivity -->
+                <div class="feature-card" id="card-feat-reactivity">
+                    <div class="feature-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                        </svg>
+                    </div>
+                    <h3>Proxy-Based Reactivity</h3>
+                    <p>
+                        State management is built directly into the core. Changing a property on the state object automatically triggers a re-render of only the affected DOM nodes without virtual DOM overhead.
+                    </p>
+                </div>
+                
+                <!-- 2. Compiler driven -->
+                <div class="feature-card" id="card-feat-compiler">
+                    <div class="feature-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                    </div>
+                    <h3>Compiler-Driven Components</h3>
+                    <p>
+                        Logic, local state, and template sit in a single unified component file. The compiler pre-parses it, generating highly optimized runtime JS classes.
+                    </p>
+                </div>
+                
+                <!-- 3. Scoped CSS -->
+                <div class="feature-card" id="card-feat-scoped">
+                    <div class="feature-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19"></path>
+                            <path d="M6 14C6.5 13 8 12.5 9 13C10 13.5 11 15 11 16.5C11 18 10 19.5 9 19.5C8 19.5 7.5 19 7 18.5"></path>
+                            <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"></circle>
+                            <circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"></circle>
+                            <circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"></circle>
+                        </svg>
+                    </div>
+                    <h3>Scoped Component Styling</h3>
+                    <p>
+                        Custom CSS is scoped automatically using unique hashed classes. Define global themes with &lt;@global&gt; and component styles inside &lt;@css&gt;.
+                    </p>
+                </div>
+                
+                <!-- 4. Global Bridges -->
+                <div class="feature-card" id="card-feat-bridges">
+                    <div class="feature-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
+                            <line x1="4" y1="22" x2="4" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Global Reactive Bridges</h3>
+                    <p>
+                        Share reactive states seamlessly between non-parent-child components. Any subscriber component automatically updates when a Bridge state changes.
+                    </p>
+                </div>
+                
+                <!-- 5. CLI first workflow -->
+                <div class="feature-card" id="card-feat-cli">
+                    <div class="feature-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="4 17 10 11 4 5"></polyline>
+                            <line x1="12" y1="19" x2="20" y2="19"></line>
+                        </svg>
+                    </div>
+                    <h3>CLI-First Workflow</h3>
+                    <p>
+                        Scaffold code in seconds. The built-in developer CLI handles application initiation, scaffolding of components/pages, and starts hot-reloading dev servers.
+                    </p>
+                </div>
+                
+                <!-- 6. Zero dependencies -->
+                <div class="feature-card" id="card-feat-deps">
+                    <div class="feature-icon">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                            <line x1="16" y1="8" x2="2" y2="22"></line>
+                            <line x1="17.5" y1="15" x2="9" y2="15"></line>
+                        </svg>
+                    </div>
+                    <h3>Zero Runtime Dependencies</h3>
+                    <p>
+                        Avenx runs entirely on standard native browser APIs. Ship extremely small production bundles without dragging along heavy runtime vendor frameworks.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Code Explorer (Interactive Deep Dive) -->
+        <section id="concepts">
+            <div class="section-header">
+                <span class="section-overline">Syntax Deep Dive</span>
+                <h2 class="section-title">Code Explorer & Core Concepts</h2>
+            </div>
+            
+            <div class="explorer-grid">
+                <!-- Left navigation menu steps -->
+                <div class="explorer-menu" id="expl-menu">
+                    <button class="explorer-item active" onclick="setExplorerStep(1)" id="btn-expl-1">
+                        <span class="explorer-step-lbl">Step 01</span>
+                        <span class="explorer-step-title">The Reactive State</span>
+                    </button>
+                    <button class="explorer-item" onclick="setExplorerStep(2)" id="btn-expl-2">
+                        <span class="explorer-step-lbl">Step 02</span>
+                        <span class="explorer-step-title">Computed Values</span>
+                    </button>
+                    <button class="explorer-item" onclick="setExplorerStep(3)" id="btn-expl-3">
+                        <span class="explorer-step-lbl">Step 03</span>
+                        <span class="explorer-step-title">Component Actions</span>
+                    </button>
+                    <button class="explorer-item" onclick="setExplorerStep(4)" id="btn-expl-4">
+                        <span class="explorer-step-lbl">Step 04</span>
+                        <span class="explorer-step-title">Scoped CSS & Custom Variables</span>
+                    </button>
+                </div>
+                
+                <!-- Right editor panel -->
+                <div class="explorer-details">
+                    <div class="ide-card">
+                        <div class="ide-header">
+                            <div class="ide-dots">
+                                <div class="ide-dot"></div>
+                                <div class="ide-dot"></div>
+                                <div class="ide-dot"></div>
+                            </div>
+                            <span class="ide-file-type" id="explorer-filename">state-block.html</span>
+                        </div>
+                        <div class="ide-body" style="min-height: 140px;">
+                            <pre><code id="explorer-code-code"><span class="tag">&lt;state</span> <span class="attr">count</span>=<span class="string">"0"</span> <span class="attr">title</span>=<span class="string">"My Component"</span> <span class="tag">/&gt;</span></code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="explorer-desc-box">
+                        <h4 id="explorer-desc-title">Defining Local State</h4>
+                        <p id="explorer-desc-text">
+                            Define initial properties directly inside the &lt;state&gt; tag. The compiler parses this tag to initialize the component's internal proxy handler automatically. No useState() hook or custom getters are needed.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Interactive Demo (Interactive Sandbox Simulation) -->
+        <section id="demo-sandbox">
+            <div class="section-header">
+                <span class="section-overline">Live Sandbox</span>
+                <h2 class="section-title">Feel the Reactivity Live</h2>
+                <p class="section-desc">Interact with the compiled widget on the right and watch the state values trigger updates in the mock code block on the left.</p>
+            </div>
+            
+            <div class="sandbox-grid">
+                <!-- Left Code Highlight view -->
+                <div class="ide-card">
+                    <div class="ide-header">
+                        <div class="ide-dots">
+                            <div class="ide-dot"></div>
+                            <div class="ide-dot"></div>
+                            <div class="ide-dot"></div>
+                        </div>
+                        <span class="ide-file-type">counter.component.js</span>
+                    </div>
+                    <div class="ide-body">
+                        <pre><code><span class="tag" id="hl-state-line">&lt;state count="<span class="number" id="hl-count-val">0</span>" title="Counter" /&gt;</span>
+<span class="tag">&lt;computed name="doubleCount" value="count * 2" /&gt;</span>
+
+<span class="tag" id="hl-action-line">&lt;action name="increment"&gt;
+    state.count++;
+&lt;/action&gt;</span>
+
+<span class="tag">&lt;div class="counter-card"&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>{{ title }}<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag" id="hl-render-line">&lt;p&gt;Count: {{ count }} (Double: <span class="number" id="hl-double-val">0</span>)<span class="tag">&lt;/p&gt;</span></span>
+    <span class="tag">&lt;button @click="increment()"&gt;</span>+1<span class="tag">&lt;/button&gt;</span>
+<span class="tag">&lt;/div&gt;</span></code></pre>
+                    </div>
+                </div>
+                
+                <!-- Right Live Preview Card -->
+                <div class="live-output-card">
+                    <div class="live-output-header">
+                        <span class="live-output-title">Live Demo Counter</span>
+                        <div class="live-indicator">
+                            <div class="live-dot"></div>
+                            <span>Running View</span>
+                        </div>
+                    </div>
+                    
+                    <div class="sandbox-widget">
+                        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;" id="widget-title">Counter</h4>
+                        <div class="sandbox-value-group">
+                            <span class="sandbox-count" id="widget-count">0</span>
+                            <div class="sandbox-double-lbl">doubleCount = <span class="sandbox-double-val" id="widget-double">0</span></div>
+                        </div>
+                        <div class="sandbox-btn-group">
+                            <button class="btn btn-solid" onclick="sandboxIncrement()">+1 Increment</button>
+                            <button class="btn btn-outline" onclick="sandboxReset()">Reset</button>
+                        </div>
+                    </div>
+                    
+                    <div class="state-observer">
+                        <div class="state-observer-header">
+                            <span>State Observer</span>
+                            <span>active reactive proxy</span>
+                        </div>
+                        <pre><code id="widget-state-json">{
+  "count": 0,
+  "title": "Counter"
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Shared State (Bridges) Section -->
+        <section id="bridges">
+            <div class="section-header">
+                <span class="section-overline">Global State</span>
+                <h2 class="section-title">Shared State with Reactive Bridges</h2>
+                <p class="section-desc">Share reactive values across components instantly. No Redux, no boilerplate, just pure reactive synchronization.</p>
+            </div>
+            
+            <div class="bridge-grid">
+                <!-- Left: Diagram Visual -->
+                <div class="bridge-diagram" id="diagram-container">
+                    <div class="diagram-node" id="node-comp-a">Header Component</div>
+                    <div class="diagram-node diagram-node-center" id="node-bridge-obj">⚡ AuthBridge</div>
+                    <div class="diagram-node" id="node-comp-b">Settings Component</div>
+                    
+                    <svg class="diagram-lines">
+                        <path class="diagram-svg-path" id="svg-line-a" d="M 0 0 L 0 0"></path>
+                        <path class="diagram-svg-path-glow" id="svg-glow-a" d="M 0 0 L 0 0"></path>
+                        <path class="diagram-svg-path" id="svg-line-b" d="M 0 0 L 0 0"></path>
+                        <path class="diagram-svg-path-glow" id="svg-glow-b" d="M 0 0 L 0 0"></path>
+                    </svg>
+                </div>
+                
+                <!-- Right: Code Snippets & Text -->
+                <div class="bridge-snippets">
+                    <div class="ide-card">
+                        <div class="ide-header">
+                            <div class="ide-dots">
+                                <div class="ide-dot"></div>
+                                <div class="ide-dot"></div>
+                                <div class="ide-dot"></div>
+                            </div>
+                            <span class="ide-file-type">auth.bridge.js</span>
+                        </div>
+                        <div class="ide-body">
+                            <pre><code><span class="keyword">export default</span> {
+    isLoggedIn: <span class="number">false</span>,
+    user: { name: <span class="string">'Guest'</span> }
+}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="ide-card">
+                        <div class="ide-header">
+                            <div class="ide-dots">
+                                <div class="ide-dot"></div>
+                                <div class="ide-dot"></div>
+                                <div class="ide-dot"></div>
+                            </div>
+                            <span class="ide-file-type">header.component.js</span>
+                        </div>
+                        <div class="ide-body">
+                            <pre><code><span class="tag">&lt;nav&gt;</span>
+    <span class="tag">&lt;span&gt;</span>Welcome, {{ AuthBridge.user.name }}<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;/nav&gt;</span></code></pre>
+                        </div>
+                    </div>
+                    
+                    <p>
+                        No more prop-drilling or complex state models. Global Bridges are shared, reactive objects. Any component referencing <code style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600;">AuthBridge</code> automatically re-renders when another component updates a bridge value.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. CLI Reference & Quick Start Guide -->
+        <section id="cli">
+            <div class="section-header">
+                <span class="section-overline">Developer CLI</span>
+                <h2 class="section-title">CLI Reference & Setup</h2>
+                <p class="section-desc">Run commands directly in our mock terminal below to see the developer experience in action.</p>
+            </div>
+            
+            <div class="cli-grid">
+                <!-- Left: List steps -->
+                <ul class="cli-steps">
+                    <li class="cli-step-item">
+                        <div class="cli-step-num">1</div>
+                        <div class="cli-step-desc">
+                            <h4>Install Avenx-JS</h4>
+                            <p>Configure the local library in your node workspace.</p>
+                            <button class="cli-btn-execute" onclick="executeCLI('install')">Run Install</button>
+                        </div>
+                    </li>
+                    <li class="cli-step-item">
+                        <div class="cli-step-num">2</div>
+                        <div class="cli-step-desc">
+                            <h4>Scaffold a Project</h4>
+                            <p>Initialize directory templates, routing structure, and files.</p>
+                            <button class="cli-btn-execute" onclick="executeCLI('init')">Run Init</button>
+                        </div>
+                    </li>
+                    <li class="cli-step-item">
+                        <div class="cli-step-num">3</div>
+                        <div class="cli-step-desc">
+                            <h4>Generate Components</h4>
+                            <p>Scaffold a new single-file component template automatically.</p>
+                            <button class="cli-btn-execute" onclick="executeCLI('gen')">Run Gen</button>
+                        </div>
+                    </li>
+                    <li class="cli-step-item">
+                        <div class="cli-step-num">4</div>
+                        <div class="cli-step-desc">
+                            <h4>Run the Server</h4>
+                            <p>Start dev server with file compilers and live reload enabled.</p>
+                            <button class="cli-btn-execute" onclick="executeCLI('serve')">Run Serve</button>
+                        </div>
+                    </li>
+                </ul>
+                
+                <!-- Right: Shell terminal simulator -->
+                <div class="terminal-card">
+                    <div class="ide-header">
+                        <div class="ide-dots">
+                            <div class="ide-dot"></div>
+                            <div class="ide-dot"></div>
+                            <div class="ide-dot"></div>
+                        </div>
+                        <span class="ide-file-type">bash - avenx-cli</span>
+                    </div>
+                    <div class="terminal-screen" id="term-box">
+                        <span class="terminal-prompt">user@avenx:~$</span> <span id="term-typed"></span><span class="terminal-cursor" id="term-cursor"></span>
+                        <div id="term-log" style="margin-top: 0.4rem; white-space: pre-wrap;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Footer (Call-to-Action Banner) -->
+        <section id="quickstart">
+            <div class="cta-banner">
+                <h2>Ready to build with Avenx-JS?</h2>
+                <p>Star the project on GitHub and join us in exploring the future of zero-dependency compilable reactive frontends.</p>
+                <div class="hero-buttons">
+                    <a href="#cli" class="btn btn-solid" style="padding: 0.7rem 1.5rem;">Get Started Now</a>
+                    <a href="https://github.com/avenx-js/avenx" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.7rem 1.5rem;">
+                        ★ Star on GitHub
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- Structured Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-info">
                     <div class="logo">Avenx<span>.js</span></div>
-                    <p>&copy; 2026 Avenx.js. All rights reserved.</p>
+                    <p>Build blazing fast interfaces with zero runtime dependencies. Compiler-driven reactivity for the modern web.</p>
+                    <p style="font-size: 0.75rem; margin-top: 0.5rem;">&copy; 2026 Avenx.js. All rights reserved.</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-group">
@@ -273,10 +1551,312 @@
                             <li><a href="https://avenx-js.github.io/bench-results/">Benchmark Results</a></li>
                         </ul>
                     </div>
+                    <div class="footer-group">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="https://github.com/avenx-js">GitHub</a></li>
+                            <li><a href="https://www.npmjs.com/package/avenx-core">NPM Package</a></li>
+                            <li><a href="">Issue Tracker</a></li>
+                        </ul>
+                    </div>
                 </div>
+            </div>
+            <div class="footer-bottom">
+                <span>Distributed under the MIT License.</span>
+                <span style="opacity: 0.5;">Designed for simplicity and raw speed.</span>
             </div>
         </div>
     </footer>
+
+    <!-- Interactive Scripting -->
+    <script>
+        // --- 1. Copy NPM install box ---
+        function copyNpmText() {
+            const cmdText = document.getElementById('npm-command-string').innerText;
+            const tooltip = document.getElementById('install-tooltip');
+            
+            navigator.clipboard.writeText(cmdText).then(() => {
+                tooltip.classList.add('show');
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                }, 1800);
+            }).catch(e => {
+                console.error("Clipboard copy failed: ", e);
+            });
+        }
+
+        // --- 2. Showcase IDE Tabs ---
+        function switchShowcaseTab(tab) {
+            const btnJs = document.getElementById('tab-sc-js');
+            const btnCss = document.getElementById('tab-sc-css');
+            const codeJs = document.getElementById('code-sc-js');
+            const codeCss = document.getElementById('code-sc-css');
+            const fileLabel = document.getElementById('sc-filetype-label');
+            
+            if (tab === 'js') {
+                btnJs.classList.add('active');
+                btnCss.classList.remove('active');
+                codeJs.classList.add('active');
+                codeCss.classList.remove('active');
+                fileLabel.innerText = 'Avenx SFC';
+            } else {
+                btnJs.classList.remove('active');
+                btnCss.classList.add('active');
+                codeJs.classList.remove('active');
+                codeCss.classList.add('active');
+                fileLabel.innerText = 'Scoped CSS';
+            }
+        }
+
+        // --- 3. Syntax Explorer (Deep Dive) ---
+        const stepsData = {
+            1: {
+                filename: 'state-block.html',
+                code: `<span class="tag">&lt;state</span> <span class="attr">count</span>=<span class="string">"0"</span> <span class="attr">title</span>=<span class="string">"My Component"</span> <span class="tag">/&gt;</span>`,
+                title: 'Defining Local State',
+                desc: 'Define initial properties directly inside the &lt;state&gt; tag. The compiler parses this tag to initialize the component\'s internal proxy handler automatically. No useState() hook or custom getters are needed.'
+            },
+            2: {
+                filename: 'computed-block.html',
+                code: `<span class="tag">&lt;computed</span> <span class="attr">name</span>=<span class="string">"double"</span> <span class="attr">value</span>=<span class="string">"count * 2"</span> <span class="tag">/&gt;</span>`,
+                title: 'Calculated Properties',
+                desc: 'Computeds automatically compute derived values whenever the dependencies inside their expression update. They are cache-efficient and react to changes instantly.'
+            },
+            3: {
+                filename: 'action-block.html',
+                code: `<span class="tag">&lt;action</span> <span class="attr">name</span>=<span class="string">"increment"</span><span class="tag">&gt;</span>\n    state.count++;\n<span class="tag">&lt;/action&gt;</span>`,
+                title: 'Declarative Methods',
+                desc: 'Declare action blocks in plain JavaScript. Within these blocks, modifying state updates the component view in real-time.'
+            },
+            4: {
+                filename: 'styles-block.html',
+                code: `<span class="tag">&lt;@global&gt;</span>\n    <span class="keyword">@def</span> primary-color <span class="string">#ffffff</span>;\n<span class="tag">&lt;/@global&gt;</span>\n<span class="tag">&lt;@css&gt;</span>\n    <span class="keyword">.btn</span> { <span class="attr">background</span>: <span class="string">var(--primary-color)</span>; }\n<span class="tag">&lt;/@css&gt;</span>`,
+                title: 'Smart Styles with Preprocessor',
+                desc: 'Define custom variables inside &lt;@global&gt; with @def. Scoped styles within &lt;@css&gt; are rewritten during compilation with unique CSS hashes (.avenx-[hash]) to isolate styles.'
+            }
+        };
+
+        function setExplorerStep(step) {
+            // Manage active classes in list
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById(`btn-expl-${i}`);
+                if (i === step) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            }
+            
+            const stepInfo = stepsData[step];
+            document.getElementById('explorer-filename').innerText = stepInfo.filename;
+            document.getElementById('explorer-code-code').innerHTML = stepInfo.code;
+            document.getElementById('explorer-desc-title').innerText = stepInfo.title;
+            document.getElementById('explorer-desc-text').innerHTML = stepInfo.desc;
+        }
+
+        // --- 4. Live Reactive Counter Demo ---
+        let widgetState = {
+            count: 0,
+            title: "Counter"
+        };
+
+        function renderWidgetState() {
+            // Update counts in view
+            document.getElementById('widget-count').innerText = widgetState.count;
+            document.getElementById('widget-double').innerText = widgetState.count * 2;
+            
+            // Update state visual labels
+            document.getElementById('hl-count-val').innerText = widgetState.count;
+            document.getElementById('hl-double-val').innerText = widgetState.count * 2;
+            
+            // Print proxy state representation
+            document.getElementById('widget-state-json').innerText = JSON.stringify(widgetState, null, 2);
+        }
+
+        function highlightSandboxLine(lineId) {
+            const line = document.getElementById(lineId);
+            if (line) {
+                line.classList.add('sandbox-line-highlight');
+                setTimeout(() => {
+                    line.classList.remove('sandbox-line-highlight');
+                }, 800);
+            }
+        }
+
+        function sandboxIncrement() {
+            widgetState.count++;
+            renderWidgetState();
+            
+            // Visual cues on template compilation updates
+            highlightSandboxLine('hl-action-line');
+            setTimeout(() => {
+                highlightSandboxLine('hl-render-line');
+            }, 250);
+        }
+
+        function sandboxReset() {
+            widgetState.count = 0;
+            renderWidgetState();
+            highlightSandboxLine('hl-state-line');
+        }
+
+        // --- 5. Bridge flow graph positioning ---
+        function calculateBridgePaths() {
+            const card = document.getElementById('diagram-container');
+            const compA = document.getElementById('node-comp-a');
+            const bridgeObj = document.getElementById('node-bridge-obj');
+            const compB = document.getElementById('node-comp-b');
+            
+            const lineA = document.getElementById('svg-line-a');
+            const glowA = document.getElementById('svg-glow-a');
+            const lineB = document.getElementById('svg-line-b');
+            const glowB = document.getElementById('svg-glow-b');
+            
+            if (!card || !compA || !bridgeObj || !compB || !lineA || !lineB) return;
+            
+            const cardRect = card.getBoundingClientRect();
+            const aRect = compA.getBoundingClientRect();
+            const brRect = bridgeObj.getBoundingClientRect();
+            const bRect = compB.getBoundingClientRect();
+            
+            // X coordinate centers
+            const ax = (aRect.left + aRect.width/2) - cardRect.left;
+            const ay = aRect.bottom - cardRect.top;
+            
+            const brx = (brRect.left + brRect.width/2) - cardRect.left;
+            const bryTop = brRect.top - cardRect.top;
+            const bryBot = brRect.bottom - cardRect.top;
+            
+            const bx = (bRect.left + bRect.width/2) - cardRect.left;
+            const by = bRect.top - cardRect.top;
+            
+            // Draw clean vertical curves: A -> Bridge -> B
+            const pathDataA = `M ${ax} ${ay} C ${ax} ${(ay + bryTop)/2}, ${brx} ${(ay + bryTop)/2}, ${brx} ${bryTop}`;
+            const pathDataB = `M ${bx} ${by} C ${bx} ${(by + bryBot)/2}, ${brx} ${(by + bryBot)/2}, ${brx} ${bryBot}`;
+            
+            lineA.setAttribute('d', pathDataA);
+            glowA.setAttribute('d', pathDataA);
+            
+            lineB.setAttribute('d', pathDataB);
+            glowB.setAttribute('d', pathDataB);
+        }
+
+        // --- 6. CLI Terminal Emulator ---
+        const cliData = {
+            install: {
+                cmd: 'npm install avenx-core',
+                logs: [
+                    'querying npm registry for package "avenx-core"...',
+                    'satisfying peer dependencies...',
+                    'added 1 core bundle package in 0.5s',
+                    'package active.'
+                ]
+            },
+            init: {
+                cmd: 'npx avenx init',
+                logs: [
+                    'scaffolding Avenx directory structure...',
+                    '✔ folder: src/components/ created',
+                    '✔ folder: src/pages/ created',
+                    '✔ file: src/main.app.js created',
+                    '✔ configuration: config.json template loaded',
+                    'initialization complete.'
+                ]
+            },
+            gen: {
+                cmd: 'npx avenx g counter',
+                logs: [
+                    'parsing project configuration...',
+                    'generating Single File Component...',
+                    '✔ src/components/counter.component.js successfully written.',
+                    'scaffolding finished.'
+                ]
+            },
+            serve: {
+                cmd: 'npx avenx serve',
+                logs: [
+                    'running development watcher compiler...',
+                    'watching for modifications in: src/**/*',
+                    'serving app endpoint on local web: http://localhost:3000',
+                    '✔ compiled bundle compiled in 35ms (size: 4.2 kB)'
+                ]
+            }
+        };
+
+        let isCliActive = false;
+
+        function executeCLI(cmdKey) {
+            if (isCliActive) return;
+            const data = cliData[cmdKey];
+            if (!data) return;
+            
+            isCliActive = true;
+            
+            const termTyped = document.getElementById('term-typed');
+            const termLog = document.getElementById('term-log');
+            const termBox = document.getElementById('term-box');
+            
+            termTyped.innerText = '';
+            termLog.innerText = '';
+            
+            let charIndex = 0;
+            const textToType = data.cmd;
+            
+            const typingInterval = setInterval(() => {
+                if (charIndex < textToType.length) {
+                    termTyped.innerText += textToType.charAt(charIndex);
+                    charIndex++;
+                } else {
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        printCLIOutput(data.logs);
+                    }, 250);
+                }
+            }, 40);
+        }
+
+        function printCLIOutput(logsArray) {
+            const termLog = document.getElementById('term-log');
+            const termBox = document.getElementById('term-box');
+            let logIndex = 0;
+            
+            function printLine() {
+                if (logIndex < logsArray.length) {
+                    const logLine = logsArray[logIndex];
+                    let formatted = logLine;
+                    
+                    if (logLine.startsWith('✔')) {
+                        formatted = `<span class="term-success">${logLine}</span>`;
+                    } else if (logLine.endsWith('complete.') || logLine.startsWith('serving')) {
+                        formatted = `<span class="term-success">${logLine}</span>`;
+                    } else if (logLine.includes('adding') || logLine.startsWith('watching')) {
+                        formatted = `<span class="term-dim">${logLine}</span>`;
+                    }
+                    
+                    termLog.innerHTML += formatted + '\n';
+                    termBox.scrollTop = termBox.scrollHeight;
+                    
+                    logIndex++;
+                    setTimeout(printLine, 120);
+                } else {
+                    isCliActive = false;
+                }
+            }
+            
+            printLine();
+        }
+
+        // Initialize positioning and default states
+        window.addEventListener('load', () => {
+            calculateBridgePaths();
+            window.addEventListener('resize', calculateBridgePaths);
+            
+            // Auto run first CLI instruction
+            setTimeout(() => {
+                executeCLI('init');
+            }, 800);
+        });
+    </script>
 </body>
 
 </html>
