@@ -1113,7 +1113,7 @@
                     style="opacity: 0.85; font-weight: 600;" id="nav-link-github">
                     GitHub<span class="github-stars-badge" id="github-stars">★ 21</span>
                 </a>
-                <a href="#quickstart" class="btn btn-outline"
+                <a href="https://docs.avenx-js.com" class="btn btn-outline"
                     style="padding: 0.35rem 0.8rem; font-size: 0.75rem; border-radius: 4px;" id="nav-btn-start">Get
                     Started</a>
             </div>
@@ -1497,9 +1497,14 @@
                             <span class="ide-file-type">auth.bridge.js</span>
                         </div>
                         <div class="ide-body">
-                            <pre><code><span class="keyword">export default</span> {
-    isLoggedIn: <span class="number">false</span>,
-    user: { name: <span class="string">'Guest'</span> }
+                            <pre><code><span class="keyword">import</span> { AvenxBridge } <span class="keyword">from</span> <span class="string">'avenx-core/runtime'</span>;
+
+<span class="keyword">export default class</span> <span class="tag">AuthBridge</span> <span class="keyword">extends</span> <span class="tag">AvenxBridge</span> {
+    <span class="keyword">constructor</span>() {
+        <span class="keyword">super</span>();
+        <span class="keyword">this</span>.isLoggedIn = <span class="number">false</span>;
+        <span class="keyword">this</span>.user = { name: <span class="string">'Guest'</span> };
+    }
 }</code></pre>
                         </div>
                     </div>
