@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avenx.js - The Blazingly Fast Reactivity Framework</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
@@ -16,7 +18,7 @@
             --muted-color: #8a8a93;
             --border-color: rgba(255, 255, 255, 0.08);
             --border-hover: rgba(255, 255, 255, 0.18);
-            
+
             /* Code highlights - professional slate scheme */
             --code-bg: #050507;
             --code-tag: #cbd5e1;
@@ -32,6 +34,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -105,8 +108,8 @@
         }
 
         .logo span {
-            color: var(--muted-color);
-            font-weight: 400;
+            color: var(--text-color);
+            font-weight: 800;
         }
 
         .links {
@@ -224,7 +227,7 @@
         .heading-logo {
             height: 1.2em;
             width: auto;
-            transform: translateY(-0.06em);
+            transform: translateY(0.001em);
             margin-right: -0.12em;
         }
 
@@ -438,12 +441,30 @@
         }
 
         /* Syntax Highlighting */
-        .tag { color: var(--code-tag); }
-        .attr { color: var(--code-attr); }
-        .string { color: var(--code-string); }
-        .keyword { color: var(--code-keyword); font-weight: 500; }
-        .number { color: var(--code-number); }
-        .comment { color: var(--code-comment); }
+        .tag {
+            color: var(--code-tag);
+        }
+
+        .attr {
+            color: var(--code-attr);
+        }
+
+        .string {
+            color: var(--code-string);
+        }
+
+        .keyword {
+            color: var(--code-keyword);
+            font-weight: 500;
+        }
+
+        .number {
+            color: var(--code-number);
+        }
+
+        .comment {
+            color: var(--code-comment);
+        }
 
         /* Preview Code Sandbox Showcase Section */
         .showcase-grid {
@@ -650,9 +671,17 @@
         }
 
         @keyframes pulse-dot {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
         }
 
         .sandbox-widget {
@@ -776,8 +805,13 @@
         }
 
         @keyframes flow-run {
-            0% { stroke-dashoffset: 126; }
-            100% { stroke-dashoffset: 0; }
+            0% {
+                stroke-dashoffset: 126;
+            }
+
+            100% {
+                stroke-dashoffset: 0;
+            }
         }
 
         .bridge-snippets {
@@ -895,7 +929,9 @@
         }
 
         @keyframes flash-cursor {
-            50% { opacity: 0; }
+            50% {
+                opacity: 0;
+            }
         }
 
         .term-success {
@@ -1014,7 +1050,12 @@
                 letter-spacing: -3px;
             }
 
-            .showcase-grid, .features-grid, .explorer-grid, .sandbox-grid, .bridge-grid, .cli-grid {
+            .showcase-grid,
+            .features-grid,
+            .explorer-grid,
+            .sandbox-grid,
+            .bridge-grid,
+            .cli-grid {
                 grid-template-columns: 1fr;
                 gap: 2.5rem;
             }
@@ -1055,13 +1096,12 @@
 
 <body>
     <div class="grid-overlay"></div>
-    
+
     <!-- 1. Navigation Bar (Header) -->
     <nav>
         <div class="container">
             <a href="#" class="logo" id="nav-brand">
-                <img src="media/logo.svg" alt="A" style="height: 1.1rem; width: auto; vertical-align: middle;">
-                Avenx<span>.js</span>
+                Avenx.js
             </a>
             <div class="links" id="nav-links-container">
                 <a href="#features" id="nav-link-features">Features</a>
@@ -1069,10 +1109,13 @@
                 <a href="#bridges" id="nav-link-bridges">Bridges</a>
                 <a href="#cli" id="nav-link-cli">CLI Tooling</a>
                 <a href="#quickstart" id="nav-link-quickstart">Quick Start</a>
-                <a href="https://github.com/avenx-js/avenx" target="_blank" rel="noopener noreferrer" style="opacity: 0.85; font-weight: 600;" id="nav-link-github">
-                    GitHub<span class="github-stars-badge" id="github-stars">★ 1.2k</span>
+                <a href="https://github.com/Avenx-JS/avenx-js" target="_blank" rel="noopener noreferrer"
+                    style="opacity: 0.85; font-weight: 600;" id="nav-link-github">
+                    GitHub<span class="github-stars-badge" id="github-stars">★ 21</span>
                 </a>
-                <a href="#quickstart" class="btn btn-outline" style="padding: 0.35rem 0.8rem; font-size: 0.75rem; border-radius: 4px;" id="nav-btn-start">Get Started</a>
+                <a href="#quickstart" class="btn btn-outline"
+                    style="padding: 0.35rem 0.8rem; font-size: 0.75rem; border-radius: 4px;" id="nav-btn-start">Get
+                    Started</a>
             </div>
         </div>
     </nav>
@@ -1084,13 +1127,15 @@
                 <h1><img src="media/logo.svg" alt="A" class="heading-logo">venx.js</h1>
                 <p class="hero-tagline">The Blazingly Fast Reactivity Framework.</p>
                 <p class="hero-desc">
-                    A compiler-driven component system with proxy-based reactivity, scoped styles, and zero runtime dependencies. Build fast, ship light.
+                    A compiler-driven component system with proxy-based reactivity, scoped styles, and zero runtime
+                    dependencies. Build fast, ship light.
                 </p>
-                
+
                 <!-- NPM copyable container -->
                 <div class="install-box" onclick="copyNpmText()" id="hero-npm-install">
                     <span class="install-text" id="npm-command-string">npm install avenx-core</span>
-                    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
@@ -1113,13 +1158,16 @@
                     <span class="section-overline" style="text-align: left;">SFC Pattern</span>
                     <h3>Single File, Scoped styles.</h3>
                     <p>
-                        Avenx components unify state declaration, calculated attributes, and markup handlers in a single `.component.js` structure. Global themes and isolated scoped styles sit cleanly in custom tag headers.
+                        Avenx components unify state declaration, calculated attributes, and markup handlers in a single
+                        `.component.js` structure. Global themes and isolated scoped styles sit cleanly in custom tag
+                        headers.
                     </p>
                     <p>
-                        The dev bundle parses these components offline to generate lightweight standard ES modules running natively in the client.
+                        The dev bundle parses these components offline to generate lightweight standard ES modules
+                        running natively in the client.
                     </p>
                 </div>
-                
+
                 <!-- Right column mockup tabs -->
                 <div class="ide-card" id="showcase-ide">
                     <div class="ide-header">
@@ -1129,8 +1177,10 @@
                             <div class="ide-dot"></div>
                         </div>
                         <div class="ide-tabs">
-                            <button class="ide-tab active" onclick="switchShowcaseTab('js')" id="tab-sc-js">counter.component.js</button>
-                            <button class="ide-tab" onclick="switchShowcaseTab('css')" id="tab-sc-css">counter.component.css</button>
+                            <button class="ide-tab active" onclick="switchShowcaseTab('js')"
+                                id="tab-sc-js">counter.component.js</button>
+                            <button class="ide-tab" onclick="switchShowcaseTab('css')"
+                                id="tab-sc-css">counter.component.css</button>
                         </div>
                         <span class="ide-file-type" id="sc-filetype-label">Avenx SFC</span>
                     </div>
@@ -1148,7 +1198,7 @@
     <span class="tag">&lt;p&gt;</span>Count: {{ count }} (Double: {{ doubleCount }})<span class="tag">&lt;/p&gt;</span>
     <span class="tag">&lt;button</span> <span class="attr">@click</span>=<span class="string">"increment()"</span><span class="tag">&gt;</span>+1<span class="tag">&lt;/button&gt;</span>
 <span class="tag">&lt;/div&gt;</span></code></pre>
-                        
+
                         <!-- CSS code content -->
                         <pre class="ide-code" id="code-sc-css"><code><span class="tag">&lt;@global&gt;</span>
     <span class="keyword">@def</span> primary-color <span class="string">#ffffff</span>;
@@ -1175,40 +1225,49 @@
                 <span class="section-overline" id="feat-overline">Zero Boilerplate. High Performance.</span>
                 <h2 class="section-title" id="feat-title">Why Developers Choose Avenx-JS</h2>
             </div>
-            
+
             <div class="features-grid" id="features-cards">
                 <!-- 1. Proxy reactivity -->
                 <div class="feature-card" id="card-feat-reactivity">
                     <div class="feature-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
                         </svg>
                     </div>
                     <h3>Proxy-Based Reactivity</h3>
                     <p>
-                        State management is built directly into the core. Changing a property on the state object automatically triggers a re-render of only the affected DOM nodes without virtual DOM overhead.
+                        State management is built directly into the core. Changing a property on the state object
+                        automatically triggers a re-render of only the affected DOM nodes without virtual DOM overhead.
                     </p>
                 </div>
-                
+
                 <!-- 2. Compiler driven -->
                 <div class="feature-card" id="card-feat-compiler">
                     <div class="feature-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
                     </div>
                     <h3>Compiler-Driven Components</h3>
                     <p>
-                        Logic, local state, and template sit in a single unified component file. The compiler pre-parses it, generating highly optimized runtime JS classes.
+                        Logic, local state, and template sit in a single unified component file. The compiler pre-parses
+                        it, generating highly optimized runtime JS classes.
                     </p>
                 </div>
-                
+
                 <!-- 3. Scoped CSS -->
                 <div class="feature-card" id="card-feat-scoped">
                     <div class="feature-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19"></path>
-                            <path d="M6 14C6.5 13 8 12.5 9 13C10 13.5 11 15 11 16.5C11 18 10 19.5 9 19.5C8 19.5 7.5 19 7 18.5"></path>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 14.7255 3.09032 17.1962 4.85857 19">
+                            </path>
+                            <path
+                                d="M6 14C6.5 13 8 12.5 9 13C10 13.5 11 15 11 16.5C11 18 10 19.5 9 19.5C8 19.5 7.5 19 7 18.5">
+                            </path>
                             <circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"></circle>
                             <circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"></circle>
                             <circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"></circle>
@@ -1216,42 +1275,48 @@
                     </div>
                     <h3>Scoped Component Styling</h3>
                     <p>
-                        Custom CSS is scoped automatically using unique hashed classes. Define global themes with &lt;@global&gt; and component styles inside &lt;@css&gt;.
+                        Custom CSS is scoped automatically using unique hashed classes. Define global themes with
+                        &lt;@global&gt; and component styles inside &lt;@css&gt;.
                     </p>
                 </div>
-                
+
                 <!-- 4. Global Bridges -->
                 <div class="feature-card" id="card-feat-bridges">
                     <div class="feature-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
                             <line x1="4" y1="22" x2="4" y2="15"></line>
                         </svg>
                     </div>
                     <h3>Global Reactive Bridges</h3>
                     <p>
-                        Share reactive states seamlessly between non-parent-child components. Any subscriber component automatically updates when a Bridge state changes.
+                        Share reactive states seamlessly between non-parent-child components. Any subscriber component
+                        automatically updates when a Bridge state changes.
                     </p>
                 </div>
-                
+
                 <!-- 5. CLI first workflow -->
                 <div class="feature-card" id="card-feat-cli">
                     <div class="feature-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <polyline points="4 17 10 11 4 5"></polyline>
                             <line x1="12" y1="19" x2="20" y2="19"></line>
                         </svg>
                     </div>
                     <h3>CLI-First Workflow</h3>
                     <p>
-                        Scaffold code in seconds. The built-in developer CLI handles application initiation, scaffolding of components/pages, and starts hot-reloading dev servers.
+                        Scaffold code in seconds. The built-in developer CLI handles application initiation, scaffolding
+                        of components/pages, and starts hot-reloading dev servers.
                     </p>
                 </div>
-                
+
                 <!-- 6. Zero dependencies -->
                 <div class="feature-card" id="card-feat-deps">
                     <div class="feature-icon">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
                             <line x1="16" y1="8" x2="2" y2="22"></line>
                             <line x1="17.5" y1="15" x2="9" y2="15"></line>
@@ -1259,7 +1324,8 @@
                     </div>
                     <h3>Zero Runtime Dependencies</h3>
                     <p>
-                        Avenx runs entirely on standard native browser APIs. Ship extremely small production bundles without dragging along heavy runtime vendor frameworks.
+                        Avenx runs entirely on standard native browser APIs. Ship extremely small production bundles
+                        without dragging along heavy runtime vendor frameworks.
                     </p>
                 </div>
             </div>
@@ -1271,7 +1337,7 @@
                 <span class="section-overline">Syntax Deep Dive</span>
                 <h2 class="section-title">Code Explorer & Core Concepts</h2>
             </div>
-            
+
             <div class="explorer-grid">
                 <!-- Left navigation menu steps -->
                 <div class="explorer-menu" id="expl-menu">
@@ -1292,7 +1358,7 @@
                         <span class="explorer-step-title">Scoped CSS & Custom Variables</span>
                     </button>
                 </div>
-                
+
                 <!-- Right editor panel -->
                 <div class="explorer-details">
                     <div class="ide-card">
@@ -1308,11 +1374,13 @@
                             <pre><code id="explorer-code-code"><span class="tag">&lt;state</span> <span class="attr">count</span>=<span class="string">"0"</span> <span class="attr">title</span>=<span class="string">"My Component"</span> <span class="tag">/&gt;</span></code></pre>
                         </div>
                     </div>
-                    
+
                     <div class="explorer-desc-box">
                         <h4 id="explorer-desc-title">Defining Local State</h4>
                         <p id="explorer-desc-text">
-                            Define initial properties directly inside the &lt;state&gt; tag. The compiler parses this tag to initialize the component's internal proxy handler automatically. No useState() hook or custom getters are needed.
+                            Define initial properties directly inside the &lt;state&gt; tag. The compiler parses this
+                            tag to initialize the component's internal proxy handler automatically. No useState() hook
+                            or custom getters are needed.
                         </p>
                     </div>
                 </div>
@@ -1324,9 +1392,10 @@
             <div class="section-header">
                 <span class="section-overline">Live Sandbox</span>
                 <h2 class="section-title">Feel the Reactivity Live</h2>
-                <p class="section-desc">Interact with the compiled widget on the right and watch the state values trigger updates in the mock code block on the left.</p>
+                <p class="section-desc">Interact with the compiled widget on the right and watch the state values
+                    trigger updates in the mock code block on the left.</p>
             </div>
-            
+
             <div class="sandbox-grid">
                 <!-- Left Code Highlight view -->
                 <div class="ide-card">
@@ -1353,7 +1422,7 @@
 <span class="tag">&lt;/div&gt;</span></code></pre>
                     </div>
                 </div>
-                
+
                 <!-- Right Live Preview Card -->
                 <div class="live-output-card">
                     <div class="live-output-header">
@@ -1363,19 +1432,21 @@
                             <span>Running View</span>
                         </div>
                     </div>
-                    
+
                     <div class="sandbox-widget">
-                        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;" id="widget-title">Counter</h4>
+                        <h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;" id="widget-title">
+                            Counter</h4>
                         <div class="sandbox-value-group">
                             <span class="sandbox-count" id="widget-count">0</span>
-                            <div class="sandbox-double-lbl">doubleCount = <span class="sandbox-double-val" id="widget-double">0</span></div>
+                            <div class="sandbox-double-lbl">doubleCount = <span class="sandbox-double-val"
+                                    id="widget-double">0</span></div>
                         </div>
                         <div class="sandbox-btn-group">
                             <button class="btn btn-solid" onclick="sandboxIncrement()">+1 Increment</button>
                             <button class="btn btn-outline" onclick="sandboxReset()">Reset</button>
                         </div>
                     </div>
-                    
+
                     <div class="state-observer">
                         <div class="state-observer-header">
                             <span>State Observer</span>
@@ -1395,16 +1466,17 @@
             <div class="section-header">
                 <span class="section-overline">Global State</span>
                 <h2 class="section-title">Shared State with Reactive Bridges</h2>
-                <p class="section-desc">Share reactive values across components instantly. No Redux, no boilerplate, just pure reactive synchronization.</p>
+                <p class="section-desc">Share reactive values across components instantly. No Redux, no boilerplate,
+                    just pure reactive synchronization.</p>
             </div>
-            
+
             <div class="bridge-grid">
                 <!-- Left: Diagram Visual -->
                 <div class="bridge-diagram" id="diagram-container">
                     <div class="diagram-node" id="node-comp-a">Header Component</div>
                     <div class="diagram-node diagram-node-center" id="node-bridge-obj">⚡ AuthBridge</div>
                     <div class="diagram-node" id="node-comp-b">Settings Component</div>
-                    
+
                     <svg class="diagram-lines">
                         <path class="diagram-svg-path" id="svg-line-a" d="M 0 0 L 0 0"></path>
                         <path class="diagram-svg-path-glow" id="svg-glow-a" d="M 0 0 L 0 0"></path>
@@ -1412,7 +1484,7 @@
                         <path class="diagram-svg-path-glow" id="svg-glow-b" d="M 0 0 L 0 0"></path>
                     </svg>
                 </div>
-                
+
                 <!-- Right: Code Snippets & Text -->
                 <div class="bridge-snippets">
                     <div class="ide-card">
@@ -1431,7 +1503,7 @@
 }</code></pre>
                         </div>
                     </div>
-                    
+
                     <div class="ide-card">
                         <div class="ide-header">
                             <div class="ide-dots">
@@ -1447,9 +1519,12 @@
 <span class="tag">&lt;/nav&gt;</span></code></pre>
                         </div>
                     </div>
-                    
+
                     <p>
-                        No more prop-drilling or complex state models. Global Bridges are shared, reactive objects. Any component referencing <code style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600;">AuthBridge</code> automatically re-renders when another component updates a bridge value.
+                        No more prop-drilling or complex state models. Global Bridges are shared, reactive objects. Any
+                        component referencing <code
+                            style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600;">AuthBridge</code>
+                        automatically re-renders when another component updates a bridge value.
                     </p>
                 </div>
             </div>
@@ -1460,9 +1535,10 @@
             <div class="section-header">
                 <span class="section-overline">Developer CLI</span>
                 <h2 class="section-title">CLI Reference & Setup</h2>
-                <p class="section-desc">Run commands directly in our mock terminal below to see the developer experience in action.</p>
+                <p class="section-desc">Run commands directly in our mock terminal below to see the developer experience
+                    in action.</p>
             </div>
-            
+
             <div class="cli-grid">
                 <!-- Left: List steps -->
                 <ul class="cli-steps">
@@ -1499,7 +1575,7 @@
                         </div>
                     </li>
                 </ul>
-                
+
                 <!-- Right: Shell terminal simulator -->
                 <div class="terminal-card">
                     <div class="ide-header">
@@ -1511,7 +1587,8 @@
                         <span class="ide-file-type">bash - avenx-cli</span>
                     </div>
                     <div class="terminal-screen" id="term-box">
-                        <span class="terminal-prompt">user@avenx:~$</span> <span id="term-typed"></span><span class="terminal-cursor" id="term-cursor"></span>
+                        <span class="terminal-prompt">user@avenx:~$</span> <span id="term-typed"></span><span
+                            class="terminal-cursor" id="term-cursor"></span>
                         <div id="term-log" style="margin-top: 0.4rem; white-space: pre-wrap;"></div>
                     </div>
                 </div>
@@ -1522,10 +1599,12 @@
         <section id="quickstart">
             <div class="cta-banner">
                 <h2>Ready to build with Avenx-JS?</h2>
-                <p>Star the project on GitHub and join us in exploring the future of zero-dependency compilable reactive frontends.</p>
+                <p>Star the project on GitHub and join us in exploring the future of zero-dependency compilable reactive
+                    frontends.</p>
                 <div class="hero-buttons">
                     <a href="#cli" class="btn btn-solid" style="padding: 0.7rem 1.5rem;">Get Started Now</a>
-                    <a href="https://github.com/avenx-js/avenx" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.7rem 1.5rem;">
+                    <a href="https://github.com/Avenx-JS/avenx-js" target="_blank" rel="noopener noreferrer"
+                        class="btn btn-outline" style="padding: 0.7rem 1.5rem;">
                         ★ Star on GitHub
                     </a>
                 </div>
@@ -1539,7 +1618,8 @@
             <div class="footer-content">
                 <div class="footer-info">
                     <div class="logo">Avenx<span>.js</span></div>
-                    <p>Build blazing fast interfaces with zero runtime dependencies. Compiler-driven reactivity for the modern web.</p>
+                    <p>Build blazing fast interfaces with zero runtime dependencies. Compiler-driven reactivity for the
+                        modern web.</p>
                     <p style="font-size: 0.75rem; margin-top: 0.5rem;">&copy; 2026 Avenx.js. All rights reserved.</p>
                 </div>
                 <div class="footer-links">
@@ -1574,7 +1654,7 @@
         function copyNpmText() {
             const cmdText = document.getElementById('npm-command-string').innerText;
             const tooltip = document.getElementById('install-tooltip');
-            
+
             navigator.clipboard.writeText(cmdText).then(() => {
                 tooltip.classList.add('show');
                 setTimeout(() => {
@@ -1592,7 +1672,7 @@
             const codeJs = document.getElementById('code-sc-js');
             const codeCss = document.getElementById('code-sc-css');
             const fileLabel = document.getElementById('sc-filetype-label');
-            
+
             if (tab === 'js') {
                 btnJs.classList.add('active');
                 btnCss.classList.remove('active');
@@ -1646,7 +1726,7 @@
                     btn.classList.remove('active');
                 }
             }
-            
+
             const stepInfo = stepsData[step];
             document.getElementById('explorer-filename').innerText = stepInfo.filename;
             document.getElementById('explorer-code-code').innerHTML = stepInfo.code;
@@ -1664,11 +1744,11 @@
             // Update counts in view
             document.getElementById('widget-count').innerText = widgetState.count;
             document.getElementById('widget-double').innerText = widgetState.count * 2;
-            
+
             // Update state visual labels
             document.getElementById('hl-count-val').innerText = widgetState.count;
             document.getElementById('hl-double-val').innerText = widgetState.count * 2;
-            
+
             // Print proxy state representation
             document.getElementById('widget-state-json').innerText = JSON.stringify(widgetState, null, 2);
         }
@@ -1686,7 +1766,7 @@
         function sandboxIncrement() {
             widgetState.count++;
             renderWidgetState();
-            
+
             // Visual cues on template compilation updates
             highlightSandboxLine('hl-action-line');
             setTimeout(() => {
@@ -1706,37 +1786,37 @@
             const compA = document.getElementById('node-comp-a');
             const bridgeObj = document.getElementById('node-bridge-obj');
             const compB = document.getElementById('node-comp-b');
-            
+
             const lineA = document.getElementById('svg-line-a');
             const glowA = document.getElementById('svg-glow-a');
             const lineB = document.getElementById('svg-line-b');
             const glowB = document.getElementById('svg-glow-b');
-            
+
             if (!card || !compA || !bridgeObj || !compB || !lineA || !lineB) return;
-            
+
             const cardRect = card.getBoundingClientRect();
             const aRect = compA.getBoundingClientRect();
             const brRect = bridgeObj.getBoundingClientRect();
             const bRect = compB.getBoundingClientRect();
-            
+
             // X coordinate centers
-            const ax = (aRect.left + aRect.width/2) - cardRect.left;
+            const ax = (aRect.left + aRect.width / 2) - cardRect.left;
             const ay = aRect.bottom - cardRect.top;
-            
-            const brx = (brRect.left + brRect.width/2) - cardRect.left;
+
+            const brx = (brRect.left + brRect.width / 2) - cardRect.left;
             const bryTop = brRect.top - cardRect.top;
             const bryBot = brRect.bottom - cardRect.top;
-            
-            const bx = (bRect.left + bRect.width/2) - cardRect.left;
+
+            const bx = (bRect.left + bRect.width / 2) - cardRect.left;
             const by = bRect.top - cardRect.top;
-            
+
             // Draw clean vertical curves: A -> Bridge -> B
-            const pathDataA = `M ${ax} ${ay} C ${ax} ${(ay + bryTop)/2}, ${brx} ${(ay + bryTop)/2}, ${brx} ${bryTop}`;
-            const pathDataB = `M ${bx} ${by} C ${bx} ${(by + bryBot)/2}, ${brx} ${(by + bryBot)/2}, ${brx} ${bryBot}`;
-            
+            const pathDataA = `M ${ax} ${ay} C ${ax} ${(ay + bryTop) / 2}, ${brx} ${(ay + bryTop) / 2}, ${brx} ${bryTop}`;
+            const pathDataB = `M ${bx} ${by} C ${bx} ${(by + bryBot) / 2}, ${brx} ${(by + bryBot) / 2}, ${brx} ${bryBot}`;
+
             lineA.setAttribute('d', pathDataA);
             glowA.setAttribute('d', pathDataA);
-            
+
             lineB.setAttribute('d', pathDataB);
             glowB.setAttribute('d', pathDataB);
         }
@@ -1789,19 +1869,19 @@
             if (isCliActive) return;
             const data = cliData[cmdKey];
             if (!data) return;
-            
+
             isCliActive = true;
-            
+
             const termTyped = document.getElementById('term-typed');
             const termLog = document.getElementById('term-log');
             const termBox = document.getElementById('term-box');
-            
+
             termTyped.innerText = '';
             termLog.innerText = '';
-            
+
             let charIndex = 0;
             const textToType = data.cmd;
-            
+
             const typingInterval = setInterval(() => {
                 if (charIndex < textToType.length) {
                     termTyped.innerText += textToType.charAt(charIndex);
@@ -1819,12 +1899,12 @@
             const termLog = document.getElementById('term-log');
             const termBox = document.getElementById('term-box');
             let logIndex = 0;
-            
+
             function printLine() {
                 if (logIndex < logsArray.length) {
                     const logLine = logsArray[logIndex];
                     let formatted = logLine;
-                    
+
                     if (logLine.startsWith('✔')) {
                         formatted = `<span class="term-success">${logLine}</span>`;
                     } else if (logLine.endsWith('complete.') || logLine.startsWith('serving')) {
@@ -1832,25 +1912,42 @@
                     } else if (logLine.includes('adding') || logLine.startsWith('watching')) {
                         formatted = `<span class="term-dim">${logLine}</span>`;
                     }
-                    
+
                     termLog.innerHTML += formatted + '\n';
                     termBox.scrollTop = termBox.scrollHeight;
-                    
+
                     logIndex++;
                     setTimeout(printLine, 120);
                 } else {
                     isCliActive = false;
                 }
             }
-            
+
             printLine();
+        }
+
+        async function fetchGitHubStars() {
+            try {
+                const response = await fetch('https://api.github.com/repos/Avenx-JS/avenx-js');
+                if (response.ok) {
+                    const data = await response.json();
+                    const stars = data.stargazers_count;
+                    const badge = document.getElementById('github-stars');
+                    if (badge) {
+                        badge.innerText = `★ ${stars >= 1000 ? (stars / 1000).toFixed(1) + 'k' : stars}`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching GitHub stars:', error);
+            }
         }
 
         // Initialize positioning and default states
         window.addEventListener('load', () => {
             calculateBridgePaths();
             window.addEventListener('resize', calculateBridgePaths);
-            
+            fetchGitHubStars();
+
             // Auto run first CLI instruction
             setTimeout(() => {
                 executeCLI('init');
