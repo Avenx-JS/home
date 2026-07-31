@@ -338,6 +338,10 @@
             padding-top: 1rem;
         }
 
+        .showcase-section {
+            padding-top: 5rem;
+        }
+
         .section-header {
             text-align: center;
             margin-bottom: 4rem;
@@ -1204,11 +1208,10 @@
                         </div>
                         <div class="ide-tabs">
                             <button class="ide-tab active" onclick="switchShowcaseTab('js')"
-                                id="tab-sc-js">product-card.component.js</button>
+                                id="tab-sc-js">card.component.js</button>
                             <button class="ide-tab" onclick="switchShowcaseTab('css')"
-                                id="tab-sc-css">product-card.component.css</button>
+                                id="tab-sc-css">card.component.css</button>
                         </div>
-                        <span class="ide-file-type" id="sc-filetype-label">Avenx SFC</span>
                     </div>
                     <div class="ide-body" style="min-height: 250px;">
                         <!-- JS code content -->
@@ -1252,7 +1255,7 @@
         <section id="features">
             <div class="section-header">
                 <span class="section-overline" id="feat-overline">Zero Boilerplate. High Performance.</span>
-                <h2 class="section-title" id="feat-title">Why Developers Choose Avenx-JS</h2>
+                <h2 class="section-title" id="feat-title">Why Developers Choose Avenx.js</h2>
             </div>
 
             <div class="features-grid" id="features-cards">
@@ -1266,7 +1269,8 @@
                     </div>
                     <h3>Direct DOM Patching</h3>
                     <p>
-                        No Virtual DOM overhead. Changing a property on the proxy state triggers targeted microtask updates directly against the real DOM using the high-speed DomPatcher engine.
+                        No Virtual DOM overhead. Changing a property on the proxy state triggers targeted microtask
+                        updates directly against the real DOM using the high-speed DomPatcher engine.
                     </p>
                 </div>
 
@@ -1280,7 +1284,8 @@
                     </div>
                     <h3>Static Subtree Optimization</h3>
                     <p>
-                        The offline compiler analyzes component markup to tag static HTML branches (`data-ax-static`). Re-renders automatically bypass static trees for zero-waste performance.
+                        The offline compiler analyzes component markup to tag static HTML branches (`data-ax-static`).
+                        Re-renders automatically bypass static trees for zero-waste performance.
                     </p>
                 </div>
 
@@ -1302,7 +1307,8 @@
                     </div>
                     <h3>Scoped CSS & Preprocessors</h3>
                     <p>
-                        Styles are hashed and scoped automatically per component. Write standard CSS, SASS, SCSS, or PostCSS directly inside `.component.css` files with `@def` theme tokens.
+                        Styles are hashed and scoped automatically per component. Write standard CSS, SASS, SCSS, or
+                        PostCSS directly inside `.component.css` files with `@def` theme tokens.
                     </p>
                 </div>
 
@@ -1317,7 +1323,8 @@
                     </div>
                     <h3>Global Reactive Bridges</h3>
                     <p>
-                        Zero-boilerplate shared state. Bridges allow components anywhere in the tree to subscribe to global state without prop-drilling or external stores like Redux or Pinia.
+                        Zero-boilerplate shared state. Bridges allow components anywhere in the tree to subscribe to
+                        global state without prop-drilling or external stores like Redux or Pinia.
                     </p>
                 </div>
 
@@ -1333,7 +1340,8 @@
                     </div>
                     <h3>Built-in Routing & Guards</h3>
                     <p>
-                        Scale effortlessly to Single Page Applications. The built-in `AvenxRouter` supports hash URLs, dynamic params (`:id`), and async security guards (`AvenxGuard`).
+                        Scale effortlessly to Single Page Applications. The built-in `AvenxRouter` supports hash URLs,
+                        dynamic params (`:id`), and async security guards (`AvenxGuard`).
                     </p>
                 </div>
 
@@ -1349,7 +1357,8 @@
                     </div>
                     <h3>Zero Runtime Dependencies</h3>
                     <p>
-                        Avenx runs entirely on standard native Web APIs. Ship ultra-light production bundles (&lt; 5 kB core footprint) without bringing along heavy vendor framework runtimes.
+                        Avenx runs entirely on standard native Web APIs. Ship ultra-light production bundles (&lt; 5 kB
+                        core footprint) without bringing along heavy vendor framework runtimes.
                     </p>
                 </div>
             </div>
@@ -1360,7 +1369,8 @@
             <div class="section-header">
                 <span class="section-overline">Live Interactive Sandbox</span>
                 <h2 class="section-title">Feel the Reactivity Live</h2>
-                <p class="section-desc">Interact with the compiled widget on the right and watch state values trigger instant updates in the template view and active proxy observer.</p>
+                <p class="section-desc">Interact with the compiled widget on the right and watch state values trigger
+                    instant updates in the template view and active proxy observer.</p>
             </div>
 
             <div class="sandbox-grid">
@@ -1508,7 +1518,8 @@
             <div class="section-header">
                 <span class="section-overline">SPA Architecture</span>
                 <h2 class="section-title">Built-in Routing & Async Guards</h2>
-                <p class="section-desc">Scale seamlessly from single components to complex Single Page Applications with zero-dependency hash routing, dynamic params, and security guards.</p>
+                <p class="section-desc">Scale seamlessly from single components to complex Single Page Applications with
+                    zero-dependency hash routing, dynamic params, and security guards.</p>
             </div>
 
             <div class="routing-grid">
@@ -1570,7 +1581,8 @@ app.initRouter({
             <div class="section-header">
                 <span class="section-overline">Developer CLI</span>
                 <h2 class="section-title">CLI Reference & Workflow</h2>
-                <p class="section-desc">Run commands directly in our mock terminal below to experience the generator workflow in action.</p>
+                <p class="section-desc">Run commands directly in our mock terminal below to experience the generator
+                    workflow in action.</p>
             </div>
 
             <div class="cli-grid">
@@ -1642,7 +1654,8 @@ app.initRouter({
             <div class="section-header">
                 <span class="section-overline">Engine Comparison</span>
                 <h2 class="section-title">How Avenx.js Compares</h2>
-                <p class="section-desc">See how Avenx.js stacks up against established frontend frameworks in architectural metrics and developer experience.</p>
+                <p class="section-desc">See how Avenx.js stacks up against established frontend frameworks in
+                    architectural metrics and developer experience.</p>
             </div>
 
             <div class="matrix-table-container">
@@ -1704,7 +1717,8 @@ app.initRouter({
                 <p>Scaffold a project in seconds or explore the source repository on GitHub.</p>
                 <div class="install-box" onclick="copyNpmText()" style="margin-bottom: 0;">
                     <span class="install-text">npx avenx init my-app</span>
-                    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg class="copy-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                         <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                     </svg>
@@ -1779,20 +1793,17 @@ app.initRouter({
             const btnCss = document.getElementById('tab-sc-css');
             const codeJs = document.getElementById('code-sc-js');
             const codeCss = document.getElementById('code-sc-css');
-            const fileLabel = document.getElementById('sc-filetype-label');
 
             if (tab === 'js') {
                 btnJs.classList.add('active');
                 btnCss.classList.remove('active');
                 codeJs.classList.add('active');
                 codeCss.classList.remove('active');
-                fileLabel.innerText = 'Avenx SFC';
             } else {
                 btnJs.classList.remove('active');
                 btnCss.classList.add('active');
                 codeJs.classList.remove('active');
                 codeCss.classList.add('active');
-                fileLabel.innerText = 'Scoped CSS (SCSS)';
             }
         }
 
