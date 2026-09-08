@@ -207,12 +207,28 @@
         background: radial-gradient(circle at 50% 30%, rgba(56, 189, 248, 0.15), transparent 60%),
                     radial-gradient(circle at 80% 20%, rgba(129, 140, 248, 0.1), transparent 50%),
                     linear-gradient(to bottom, rgba(3, 7, 18, 0.4), rgba(3, 7, 18, 0.9)), 
-                    url('media/hero.png');
+                    url('media/galaxy.jpg');
         background-size: cover;
         background-position: center;
         position: relative;
         overflow: hidden;
         padding: 5rem 0;
+    }
+
+    .hero-visual {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+
+    .hero-visual canvas {
+        display: block;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 0.95;
+        filter: drop-shadow(0 0 30px rgba(56, 189, 248, 0.18));
     }
 
     .hero::after {
@@ -227,8 +243,9 @@
     }
 
     .hero-content {
-        animation: fadeIn 1.2s ease-out forwards;
+        position: relative;
         z-index: 1;
+        animation: fadeIn 1.2s ease-out forwards;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1199,6 +1216,7 @@
 
     <!-- 2. Hero Section (Splash Hero) -->
     <header class="hero" id="hero-banner">
+        <div class="hero-visual" id="hero-visual" aria-hidden="true"></div>
         <div class="container">
             <div class="hero-content">
                 <h1><img src="media/logo.svg" alt="A" class="heading-logo">venx.js</h1>
