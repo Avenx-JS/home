@@ -41,7 +41,7 @@ window.addEventListener('mousemove', (event) => {
   mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
   mouse.y = -(((event.clientY - rect.top) / rect.height) * 2 - 1);
 
-  const maxRotation = 0.35;
+  const maxRotation = 0.45;
   targetRotation.y = mouse.x * maxRotation;
   targetRotation.x = -mouse.y * maxRotation;
 });
@@ -78,7 +78,7 @@ function animate() {
   if (model) {
     model.rotation.y += (targetRotation.y - model.rotation.y) * 0.15;
     model.rotation.x += (targetRotation.x - model.rotation.x) * 0.15;
-    model.position.y = -0.25 + Math.sin(Date.now() * 0.0015) * 0.08;
+    model.position.y = 0.25 + Math.sin(Date.now() * 0.0015) * 0.08;
   }
 
   renderer.render(scene, camera);
