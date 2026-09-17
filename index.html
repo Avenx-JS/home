@@ -17,12 +17,11 @@
             --text-color: #f8fafc;
             --muted-color: #94a3b8;
             --border-color: rgba(56, 189, 248, 0.15);
-            --border-hover: rgba(56, 189, 248, 0.4);
+            --border-hover: rgba(212, 226, 231, 0.4);
 
             /* Space-Akzente */
-            --accent-blue: #38bdf8;
-            --accent-indigo: #818cf8;
-            --glow-color: rgba(56, 189, 248, 0.25);
+            --accent-white: #ffffff;
+            --glow-color: rgba(248, 250, 251, 0.381);
 
             /* Design Tokens */
             --radius-sm: 6px;
@@ -31,7 +30,7 @@
 
             /* Code highlights - Cosmic Syntax */
             --code-bg: #020617;
-            --code-tag: #38bdf8;
+            --code-tag: #eff4f6;
             --code-attr: #7dd3fc;
             --code-string: #a5f3fc;
             --code-keyword: #c084fc;
@@ -119,7 +118,7 @@
         }
 
         .logo span {
-            color: var(--accent-blue);
+            color: var(--accent-white);
             font-weight: 800;
         }
 
@@ -140,7 +139,7 @@
 
         .links a:hover {
             opacity: 1;
-            color: var(--accent-blue);
+            color: var(--accent-white);
         }
 
         /* Buttons styles */
@@ -179,7 +178,7 @@
         }
 
         .btn-outline:hover {
-            border-color: var(--accent-blue);
+            border-color: var(--accent-white);
             background: rgba(30, 41, 59, 0.8);
             transform: translateY(-1px);
             box-shadow: 0 0 15px var(--glow-color);
@@ -193,7 +192,7 @@
             padding: 0.15rem 0.45rem;
             border-radius: 4px;
             margin-left: 0.4rem;
-            color: var(--accent-blue);
+            color: var(--accent-white);
         }
 
         /* Splash Hero (Centered) */
@@ -267,7 +266,7 @@
             align-items: center;
             justify-content: flex-start;
             /* Logo und Text links ausrichten */
-            background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #818cf8 100%);
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 50%, #ffffff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 4px 20px rgba(3, 7, 18, 0.8));
@@ -278,18 +277,16 @@
             width: auto;
             transform: translateY(0.001em);
             margin-right: -0.12em;
-            filter: drop-shadow(0 0 12px var(--accent-blue));
         }
 
         /* Hero Subtext */
         p.hero-tagline {
             font-size: 1.15rem;
-            color: var(--accent-blue);
             font-weight: 600;
             margin-bottom: 1.5rem;
             letter-spacing: 0.15em;
             text-transform: uppercase;
-            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         p.hero-desc {
@@ -320,7 +317,7 @@
         }
 
         .install-box:hover {
-            border-color: var(--accent-blue);
+            border-color: var(--accent-white);
             background: rgba(30, 41, 59, 0.95);
             box-shadow: 0 0 20px var(--glow-color);
         }
@@ -332,7 +329,7 @@
 
         .install-text::before {
             content: '$ ';
-            color: var(--accent-blue);
+            color: var(--accent-white);
         }
 
         .copy-icon {
@@ -342,7 +339,7 @@
 
         .install-box:hover .copy-icon {
             opacity: 1;
-            color: var(--accent-blue);
+            color: var(--accent-white);
         }
 
         .copy-tooltip {
@@ -350,7 +347,7 @@
             top: -38px;
             right: 50%;
             transform: translateX(50%) translateY(5px);
-            background: var(--accent-blue);
+            background: var(--accent-white);
             color: #030712;
             font-size: 0.75rem;
             font-weight: bold;
@@ -398,7 +395,7 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
-            color: var(--accent-blue);
+            color: var(--accent-white);
             margin-bottom: 0.6rem;
             display: block;
         }
@@ -496,7 +493,7 @@
         }
 
         .ide-tab.active {
-            color: var(--accent-blue);
+            color: var(--accent-white);
             background: rgba(56, 189, 248, 0.15);
             font-weight: 600;
         }
@@ -605,7 +602,7 @@
         .feature-icon {
             width: 36px;
             height: 36px;
-            color: var(--accent-blue);
+            color: var(--accent-white);
             margin-bottom: 1.4rem;
             opacity: 0.95;
             display: flex;
@@ -642,7 +639,7 @@
             width: calc(100% + 2.8rem);
             margin-left: -1.4rem;
             padding-left: 1.4rem;
-            border-left: 2px solid var(--accent-blue);
+            border-left: 2px solid var(--accent-white);
             transition: background 0.2s ease;
         }
 
@@ -677,16 +674,16 @@
             gap: 0.4rem;
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.72rem;
-            color: var(--accent-blue);
+            color: var(--accent-white);
             text-transform: uppercase;
         }
 
         .live-dot {
             width: 7px;
             height: 7px;
-            background: var(--accent-blue);
+            background: var(--accent-white);
             border-radius: 50%;
-            box-shadow: 0 0 8px var(--accent-blue);
+            box-shadow: 0 0 8px var(--accent-white);
             animation: pulse-dot 1.5s infinite;
         }
 
@@ -721,7 +718,7 @@
             font-weight: 900;
             line-height: 1;
             letter-spacing: -2px;
-            color: var(--accent-blue);
+            color: var(--accent-white);
             text-shadow: 0 0 20px var(--glow-color);
         }
 
@@ -734,7 +731,7 @@
         .sandbox-double-val {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
-            color: var(--accent-indigo);
+            color: var(--accent-white);
         }
 
         .sandbox-btn-group {
@@ -823,12 +820,12 @@
 
         .diagram-svg-path-glow {
             fill: none;
-            stroke: var(--accent-blue);
+            stroke: var(--accent-white);
             stroke-width: 2px;
             stroke-linecap: round;
             stroke-dasharray: 6, 120;
             animation: flow-run 4s linear infinite;
-            filter: drop-shadow(0 0 6px var(--accent-blue));
+            filter: drop-shadow(0 0 6px var(--accent-white));
         }
 
         @keyframes flow-run {
@@ -887,7 +884,7 @@
             height: 26px;
             border: 1px solid var(--border-color);
             background: rgba(56, 189, 248, 0.1);
-            color: var(--accent-blue);
+            color: var(--accent-white);
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.78rem;
             font-weight: 700;
@@ -914,7 +911,7 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 0.72rem;
             background: transparent;
-            color: var(--accent-blue);
+            color: var(--accent-white);
             border: 1px solid var(--border-color);
             padding: 0.2rem 0.6rem;
             border-radius: 4px;
@@ -925,7 +922,7 @@
         }
 
         .cli-btn-execute:hover {
-            border-color: var(--accent-blue);
+            border-color: var(--accent-white);
             background: rgba(56, 189, 248, 0.15);
             box-shadow: 0 0 10px var(--glow-color);
         }
@@ -953,18 +950,18 @@
         }
 
         .terminal-prompt {
-            color: var(--accent-blue);
+            color: var(--accent-white);
         }
 
         .terminal-cursor {
             display: inline-block;
             width: 6px;
             height: 13px;
-            background: var(--accent-blue);
+            background: var(--accent-white);
             vertical-align: middle;
             animation: flash-cursor 1s infinite;
             margin-left: 2px;
-            box-shadow: 0 0 5px var(--accent-blue);
+            box-shadow: 0 0 5px var(--accent-white);
         }
 
         @keyframes flash-cursor {
@@ -1020,7 +1017,7 @@
         .matrix-table td.highlight-col,
         .matrix-table th.highlight-col {
             background: rgba(56, 189, 248, 0.05);
-            color: var(--accent-blue);
+            color: var(--accent-white);
             font-weight: 600;
         }
 
@@ -1098,7 +1095,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 1.2rem;
-            color: var(--accent-blue);
+            color: var(--accent-white);
         }
 
         .footer-group ul {
@@ -1117,7 +1114,7 @@
         }
 
         .footer-group ul li a:hover {
-            color: var(--accent-blue);
+            color: var(--accent-white);
         }
 
         .footer-bottom {
